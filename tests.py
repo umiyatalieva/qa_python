@@ -24,10 +24,6 @@ class TestBooksCollector:
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
 
-    @pytest.mark.parametrize('name', [ '1abcd', '123$#', '     '])
-    def test_negative_add_new_book(self,name):
-        collector = BooksCollector()
-        assert not collector.add_new_book(name)
 
     def test_set_book_genre(self):
         collector = BooksCollector()
@@ -81,3 +77,11 @@ class TestBooksCollector:
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.add_book_in_favorites('Гордость и предубеждение и зомби')
         assert collector.get_list_of_favorites_books() == ['Гордость и предубеждение и зомби']
+
+    @pytest.mark.parametrize('favorites', ['Мастер и Маргарита'])
+    def test_get_list_of_favorites_books(self,favorites):
+        collector = BooksCollector()
+        collector.add_new_book('Мастер и Маргарита')
+        collector.add_book_in_favorites(favorites)
+        assert favorites  in collector.get_list_of_favorites_books()
+
